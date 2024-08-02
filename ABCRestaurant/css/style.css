@@ -976,35 +976,9 @@ a:hover {
 
 /* footer section end */
 
-/* copyright section start */
 
-.copyright_section {
-    width: 100%;
-    float: left;
-    background-color: #ffffff;
-    height: auto;
-}
-
-.copyright_text {
-    width: 100%;
-    float: left;
-    font-size: 16px;
-    color: #252525;
-    text-align: center;
-    margin-left: 0px;
-}
-
-.copyright_text a {
-    color: #252525;
-}
-
-.copyright_text a:hover {
-    color: #f76d37;
-}
-
-
-/* copyright section end */
 
 .margin_top90 {
     margin-top: 90px;
 }
+
