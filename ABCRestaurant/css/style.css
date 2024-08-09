@@ -795,7 +795,7 @@ a:hover {
 
 .contact_section_2 {
     width: 100%;
-    float: left;
+    float: center;
 }
 
 .mail_section {
@@ -981,4 +981,6 @@ a:hover {
 .margin_top90 {
     margin-top: 90px;
 }
+
+
 
