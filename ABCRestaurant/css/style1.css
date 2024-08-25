@@ -54,7 +54,7 @@ button {
     border: none;
     color: white;
     cursor: pointer;
-    background-color: orangered;
+    background-color: #007bff;;
     width: 100%;
     font-size: 16px;
 }
@@ -76,9 +76,12 @@ body{
 }
 .menu{
     padding: 0;
-    display: grid;
+    display: flex;
     grid-template-columns: repeat( auto-fit, minmax(350px,1fr));
     grid-gap: 20px 40px;
+}.menu .col-md-6{
+  width:49%;
+  float:left;
 }
 .heading{
     background-color:white;
@@ -138,7 +141,7 @@ body{
     align-self: stretch;
 }
 .details>button{
-    background-color: #cb202d;
+    background-color: #007bff;;
     border: none;
     color: #ffffff;
     font-size: 16px;

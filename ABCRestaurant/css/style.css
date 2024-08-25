@@ -302,7 +302,7 @@ button {
     width: 50%;
     float: left;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     margin: 0px;
     padding-bottom: 30px;
 }
@@ -866,7 +866,7 @@ a:hover {
     text-align: center;
     font-size: 16px;
     color: #ffffff;
-    background-color: #d33a11;
+    background-color: #007bff;;
     padding: 15px 50px 12px 50px;
     border-radius: 30px;
     display: block;
@@ -874,7 +874,7 @@ a:hover {
 
 .main_bt a {
     color: #ffffff;
-    background-color: #d33a11;
+    background-color: #007bff;;
 }
 
 .main_bt a:hover {
