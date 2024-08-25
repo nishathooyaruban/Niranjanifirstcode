@@ -60,11 +60,11 @@
                         <a class="nav-link" href="services.html">Services</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
+                        <a class="nav-link" href="contact.php">Contact Us</a>
                      </li>
                     
                      <li class="nav-item active">
-                     <a href="Book.html" class="btn btn-primary py-2 px-4">Book A Table</a>
+                     <a href="Book.php" class="btn btn-primary py-2 px-4">Book A Table</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="signup.html">Sign in</a>

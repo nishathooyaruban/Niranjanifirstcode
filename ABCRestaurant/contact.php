@@ -131,11 +131,11 @@
                      <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
-                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="menu.php">Menu</a></li>
                         <li><a href="gallery.html">Gallery</a></li>
                         <li><a href="services.html">Services</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="Book.html">Book a table</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
+                        <li><a href="Book.php">Book a table</a></li>
                      </ul>
                   </div>
                </div>

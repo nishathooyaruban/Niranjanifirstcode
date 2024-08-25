@@ -111,7 +111,15 @@ error_reporting(E_ALL);
 								$norio=mysqli_num_rows($runio);	while($rowio=mysqli_fetch_array($runio))	{ 	
 								?>   
 								<tr>
-								<td><?php echo $item_name=$rowio['item_name']; ?></td>
+								<td><?php  $item_name=$rowio['item_name'];
+								$sqlit= "SELECT * FROM food_items WHERE id='$item_name' ";	
+								
+								
+								$runit=mysqli_query($con,$sqlit) or die("SQL error");	
+								$norit=mysqli_num_rows($runit);	while($rowit=mysqli_fetch_array($runit))	{ 	
+								echo $rowit['name'];
+								}
+								?></td>
 								<td><?php echo $qty=$rowio['qty']; ?></td>
 								<td><?php echo $price=$rowio['price']; ?></td>
 								<td><?php echo $total=$price*$qty; $total_sub= $total_sub+$total; ?></td>
