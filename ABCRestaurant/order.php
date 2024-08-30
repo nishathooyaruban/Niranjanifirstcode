@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <?php 
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
 session_start();
 $cus_id=$_SESSION['cus_id'];
-?>
+ unset($_SESSION["shopping_cart"]); 
+?> 
      <!-- basic -->
      <meta charset="utf-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -139,7 +141,7 @@ button {
    
 	<form action="insert_order.php" method="POST">
     <div class="menu" style="float:left;width:100%">
-	 <div class="col-md-12" style="float:left;">
+	 <div class="col-md-7" style="float:left;">
 	 <div class="col-md-12 col-sm-12" style="float:left;">	
         <div class="heading">
            
@@ -157,7 +159,7 @@ button {
 								$runid=mysqli_query($con,$sqlid) or die("SQL error");	
 								$norid=mysqli_num_rows($runid);	while($rowid=mysqli_fetch_array($runid))	{ 	
 								?>    
-								 <div class="col-md-3 col-sm-12" style="float:left;">
+								 <div class="col-md-6 col-sm-12" style="float:left;">
         <div class="food-items" style="margin-bottom:10px;margin-top:10px;background:#fff;">
             <img src="images/<?php echo $rowid['img']; ?>">
             <div class="details">
@@ -167,8 +169,8 @@ button {
 					<input type="hidden" name="hidden_price" id="price<?php echo $rowid["id"]; ?>" value="<?php echo $rowid["price"]; ?>" style="width:70px;"class="form-control"/></h5>
                 </div>
                 <div class="row" >
-             
-                <a type="button" href="signup.php"><div  class="btn btn-search" style="width:100%; float:left;background-color: #007bff;color:#fff;border-radius: 30px;margin-left: 10px;">Order Now</div></a>
+               <div class="col-md-6" style="width:50%; float:left;">QTY: <input type="number" name="quantity" id="quantity<?php echo $rowid["id"]; ?>" class="form-control" value="0"  style="width:70px;"/></div>
+               <div class="col-md-6" style="width:49%; float:left;"><button type="button" id="<?php echo $rowid["id"]; ?>" class="add_to_cart"style="color;#fff !important;">Add To Cart</button></div>
             </div>
             </div>
         </div>
@@ -193,20 +195,21 @@ button {
 								$runid=mysqli_query($con,$sqlid) or die("SQL error");	
 								$norid=mysqli_num_rows($runid);	while($rowid=mysqli_fetch_array($runid))	{ 	
 								?>  
- <div class="col-md-3 col-sm-12" style="float:left;">
-        <div class="food-items" style="margin-bottom:10px;margin-top:10px;background:#fff;">
+ <div class="col-md-6 col-sm-12" style="float:left;">								
+           <div class="food-items"style="margin-bottom:10px;margin-top:10px;background:#fff;">
             <img src="images/<?php echo $rowid['img']; ?>">
             <div class="details">
                 <div class="details-sub">
                     <h5><?php echo $rowid['name']; ?><input type="hidden" name="hidden_name" id="name<?php echo $rowid["id"]; ?>" value="<?php echo $rowid["name"]; ?>" /> </h5>
                     <h5 class="price"> Rs.<?php echo $rowid['price']; ?>
 					<input type="hidden" name="hidden_price" id="price<?php echo $rowid["id"]; ?>" value="<?php echo $rowid["price"]; ?>" style="width:70px;"class="form-control"/></h5>
-                </div>
-                <div class="row" >
-             
-                <a type="button" href="signup.php"><div  class="btn btn-search" style="width:100%; float:left;background-color: #007bff;color:#fff;border-radius: 30px;margin-left: 10px;">Order Now</div></a>
+                
+			   <div class="row" >
+               <div class="col-md-6" style="width:50%; float:left;">QTY: <input type="number" name="quantity" id="quantity<?php echo $rowid["id"]; ?>" class="form-control" value="0"  style="width:70px;"/></div>
+               <div class="col-md-6" style="width:49%; float:left;"><button type="button" id="<?php echo $rowid["id"]; ?>" class="add_to_cart"style="color;#fff !important;">Add To Cart</button></div>
             </div>
             </div>
+        </div>
         </div>
         </div>
 
@@ -215,7 +218,133 @@ button {
 
     </div>
  
-	 
+	 <div  class="col-md-5" style="padding-right:75px;">
+                          <div class="table-responsive" id="order_table" style="background:#fff">  
+						    <h4 style="margin-left:10px;">Order Details</h4>
+                               <table class="table table-bordered">  
+                                    <tr>  
+                                         <th width="30%">Name</th>  
+                                         <th width="20%">QTY</th>  
+                                         <th width="20%">Price (Rs)</th>  
+                                         <th width="15%">Total (Rs)</th>  
+                                         <th width="5%">Action</th>  
+                                    </tr>  
+                                    <?php  
+					
+                 
+                                    if(!empty($_SESSION["shopping_cart"]))  
+                                    {  
+                                         $total = 0;  
+                                         foreach($_SESSION["shopping_cart"] as $keys => $values)  
+                                         {                                               
+                                    ?>  
+                                    <tr>  
+                                         <td><?php echo $values["product_name"]; ?>
+										<input type="hidden" name="pro_id[]" id="named<?php echo $values["product_name"]?>" value="<?php echo $values["product_id"];?>" /> </td>  
+                                         <td><input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["product_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="form-control quantity" /></td>  
+                                         <td align="right">
+										 <input type="text" name="price[]" id="pric<?php echo $values["product_id"]; ?>" value="<?php echo $values["product_price"]; ?>"  class="form-control pric" />
+										 
+										 </td>  
+                                         <td align="right"><?php echo number_format($values["product_quantity"] * $values["product_price"], 2); ?></td>  
+                                         <td><button name="delete" class="btn btn-danger btn-xs delete" id="<?php echo $values["product_id"]; ?>">Remove</button></td>  
+                                    </tr>  
+                                    <?php  
+                                              $total = $total + ($values["product_quantity"] * $values["product_price"]);  
+                                         }  
+                                    ?>  
+                                    <tr>  
+                                         <td colspan="3" align="right">Total</td>  
+                                         <td align="right">Rs <?php echo number_format($total, 2);?><input type="hidden" class="myclass" value="<?php echo $total; ?>" id="tot_cost"></td>  
+                                         <td></td>  
+                                    </tr>  
+                                    <tr>  
+       
+                                    </tr>  
+                                    <?php  
+                                    }  
+                                    ?>  
+                               </table>  
+							    
+                          </div> 
+						  <div class="table-responsive"  style="background:#fff" id="customer_table"> 
+						  <h4 style="margin-left:10px;">Customer Details</h4>
+				<table class="table table-bordered" >   
+				 
+					
+
+
+	
+								
+                                      <?php										 
+								include 'config/mysqlicon.php'; 	
+								
+			$cus_id=$_POST['cus_id'];
+								
+										$sqlcu= "SELECT * FROM customer WHERE id='$cus_id'";	
+								
+								
+								$runcu=mysqli_query($con,$sqlcu) or die("SQL error");	
+								$norcu=mysqli_num_rows($runcu);	while($rowcu=mysqli_fetch_array($runcu))	{ 	
+								?>  
+									
+									
+									<tr>  
+                                         <td width="30%">Customer Name</td>  
+                                         <td width="70%"><input type="text" name="name" value="<?php echo $rowcu['name']; ?>"class="form-control" required /><input type="hidden" name="cus_id" value="<?php echo $cus_id; ?>"class="form-control" required /></td>  
+                                       
+                                    </tr><tr>  
+                                         <td width="30%">Phone</td>  
+                                         <td width="70%"><input type="text" name="phone" value="<?php echo $rowcu['phone']; ?>"class="form-control" required /></td>  
+                                       
+                                    </tr><tr>  
+                                         <td width="30%">Email</td>  
+                                         <td width="70%"><input type="text" name="email" value="<?php echo $rowcu['email']; ?>"class="form-control" required /></td>  
+                                       
+                                    </tr>
+								<?php } ?>
+									<tr>  
+                                         <td width="30%">Delivery Address</td>  
+                                         <td width="70%"><input type="text" name="daddress" value=""class="form-control" required /></td>  
+                                       
+                                    </tr>
+								
+					
+							
+	
+								
+								<tr>  
+                                         <td width="30%">Delivry Date and time</td>  
+                                         <td width="70%"><input type="text" class="form-control"id="date-time-picker"name="delivery_date" placeholder="Date and Time" autocomplete="off" value="<?php echo date("Y-m-d H:i:s"); ?>" required /></td>  
+																   
+										</tr>
+										
+<tr class="pay_online">  
+                                         <td width="30%">Pay Online</td>  
+                                         <td width="70%"><label>Visa/Master<input type="radio" value="Visa_Master_online" name="pay_method"></label><label>Amex<input type="radio" value="Amex_online" name="pay_method"></label></td>  
+																   
+										</tr>
+<tr class="pay_delivery">  
+                                         <td width="30%">Pay on Delivery</td>  
+                                         <td width="70%"><label>Visa/Master<input type="radio" value="Visa_Master_Delvery" name="pay_method"></label><label>Amex<input type="radio" value="Amex_Delvery" name="pay_method"></label><label>Cash<input type="radio" value="Cash_Delvery" name="pay_method"></label>
+										 </td>  
+																   
+										</tr>
+<tr>  
+                                         <td width="30%">Message</td>  
+                                         <td width="70%"><textarea name="message" class="form-control" ></textarea></td>  
+                                       
+                                    </tr>										
+<tr>  
+                     <td colspan="5" align="center">  
+                               <input type="submit" name="place_order" class="btn btn-warning" value="Place Order" />  
+                          
+                     </td>  
+                </tr> 
+                               </table>	
+						   
+                     </div>  
+                     </div>  
 					    </div>
 					   </form>
     <!-- footer section start -->
@@ -301,10 +430,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer">
       $("#date-time-picker").datetimepicker({ format:'YYYY-MM-DD HH:mm:ss', sideBySide: true,});
     </script>
     
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>		   
-           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-		   <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-		   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+      
 	
 		
      <script>  

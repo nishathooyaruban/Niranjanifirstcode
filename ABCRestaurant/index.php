@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+   <head><?php
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);   
+session_start();
+$cus_id=$_SESSION['cus_id'];
+?>
       <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +16,7 @@
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
       <title>ABC Restaurant</title>
-      <meta name="keywords" content="">
+        <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
       <!-- bootstrap css -->
@@ -28,33 +34,38 @@
       <!-- owl stylesheets --> 
       <link rel="stylesheet" href="css/owl.carousel.min.css">
       <link rel="stylesheet" href="css/owl.theme.default.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="css/style1.css">
+	     <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
    </head>
    <body>
       <!--header section start -->
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
+               <div class="logo"><a href="index.php"><img src="images/logo.png"></a></div>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav ml-auto">
                       <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
+                        <a class="nav-link" href="about.php">About Us</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="menu.php">Menu</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="gallery.html">Gallery</a>
+                        <a class="nav-link" href="gallery.php">Gallery</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="services.html">Services</a>
+                        <a class="nav-link" href="services.php">Services</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact Us</a>
@@ -62,12 +73,20 @@
                      <li class="nav-item">
                      <a href="Book.php" class="btn btn-primary py-2 px-4">Book A Table</a>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="signup.html">Sign in</a>
-                  </li>
+                <?php if($cus_id==''){?>
+                  <li class="nav-item ">
+                        <a class="nav-link" href="signup.php">Sign in</a>
+                     </li>
+				  <?php }else{ ?>
+					 <li class="nav-item ">
+                        <a class="nav-link" href="my_account.php">My Acount</a>
+                     </li><li class="nav-item ">
+                        <a class="nav-link" href="logout.php">Log Out</a>
+                     </li>
+					  <?php } ?>
                   
                      <li class="nav-item">
-                        <a class="nav-link" href="search.html"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="search.php"><i class="fa fa-search" aria-hidden="true"></i></a>
                      </li>
                   </ul>
                </div>
@@ -157,94 +176,32 @@
                </div>
             </div>
             <div class="">
+               
                <div class="gallery_section_2">
                   <div class="row">
+				  	   <?php										 
+								include 'admin/config/config.php'; 	
+								
+								
+										$sqlid= "SELECT * FROM gallery ORDER BY id DESC LIMIT 6";	
+								
+								
+								$runid=mysqli_query($con,$sqlid) or die("SQL error");	
+								$norid=mysqli_num_rows($runid);	while($rowid=mysqli_fetch_array($runid))	{ 	
+								?>   
                      <div class="col-md-4">
                         <div class="container_main">
-                           <img src="images/menunew1.jpg" alt="Avatar" class="image">
+                           <img src="images/<?php echo $rowid['img']; ?>" alt="Avatar" class="image">
+						   <br>
                            <div class="overlay">
                               <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew2.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew3.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
+                           <?php } ?>
                   </div>
                </div>
-               <div class="gallery_section_2">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew4.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew5.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="overlay">
-                                 <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew6.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="overlay">
-                                 <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="gallery_section_2">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew7.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew8.jpeg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew9.jpeg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+            
             </div>
             
          </div>
@@ -304,30 +261,33 @@
    
       <div class="contact_section layout_padding">
          <div class="container">
-            <form action="insertcontact.php" method="post">
             <h1 class="contact_text">Contact Us</h1>
          </div>
       </div>
       <div class="contact_section_2 layout_padding">
          <div class="container-fluid">
             <div class="row">
-               <div class="col-md-6 padding_0">
+             <div class="col-md-6 padding_0">
+			   <form action="thankyou_contact.php" method="post">
                   <div class="mail_section">
                      <div class="email_text">
                         <div class="form-group">
-                           <input type="text" id="name"class="email-bt" placeholder="Name" name="name">
+                           <input type="text" id="name"class="email-bt" placeholder="Name" name="name" required >
                         </div>
                         <div class="form-group">
-                           <input type="text" id="email" pattern="[^ @]*@[^ @]*" class="email-bt" placeholder="Email" name="email">
+                           <input type="text" id="email" class="email-bt" placeholder="Email" name="email" required>
                         </div>
                         <div class="form-group">
-                           <input type="text" id="message"class="email-bt" placeholder="Phone Number" name="phone">
+                           <input type="text" id="message"class="email-bt" placeholder="Phone Number" name="phone" required>
                         </div> 
                         <div class="form-group">
-                           <textarea class="massage-bt" id="message"placeholder="Message" rows="5"  name="message"></textarea>
+                           <textarea class="massage-bt" id="message" placeholder="Message" rows="5"  name="message"></textarea>
                         </div>
                         <div class="send_btn">
-                           <div type="text"id="form-submit" class="main_bt"><a href="thankyou_contact.html">SEND</a></div>
+                           <div type="text"id="form-submit" class="main_bt">
+						   <button class="btn btn-primary" type="submit" >SEND</button>	
+						   
+						   </div>
                         </div>
                      </div>
                   </div>
@@ -356,11 +316,11 @@
                   <h3 class="useful_text">Menu</h3>
                   <div class="footer_menu">
                      <ul>
-                        <li><a href="index.html">Home</a></li>
-                           <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.php">Home</a></li>
+                           <li><a href="about.php">About Us</a></li>
                            <li><a href="menu.php">Menu</a></li>
-                           <li><a href="gallery.html">Gallery</a></li>
-                           <li><a href="services.html">Services</a></li>
+                           <li><a href="gallery.php">Gallery</a></li>
+                           <li><a href="services.php">Services</a></li>
                            <li><a href="contact.php">Contact Us</a></li>
                            <li><a href="Book.php">Book a table</a></li>
                      </ul>

@@ -2,9 +2,9 @@
 $servername="localhost";
 $username="root";
 $password="";
-$database="abc_restaurant";
+$database="abcrestaurant";
 //DB Connection via MYSQLI
-$con=mysqli_connect('localhost','root','','abc_restaurant');
+$con=mysqli_connect('localhost','root','','abcrestaurant');
 //check connection
 if(!$con){
 die("connection failed:".mysqli_connect_error());

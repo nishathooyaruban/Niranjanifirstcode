@@ -18,8 +18,8 @@
                                     <div class="card-body card-block">
                                         <form action="update_account.php" method="post" enctype="multipart/form-data" class="form-horizontal">
                                          <?php
-										 $user_id=$_POST['user_id'];
-										 $sqlusere= "SELECT * FROM users WHERE id='$u_id'";
+										 //$user_id=$_POST['user_id'];
+										 $sqlusere= "SELECT * FROM login WHERE id='$u_id'";
 	$runusere=mysqli_query($con,$sqlusere) or die("SQL error");
 	$norusere=mysqli_num_rows($runusere);
 
@@ -28,40 +28,24 @@
 
 	
 ?>										 
-                                         <input type="hidden" value="<?php echo $user_id; ?>" name="user_id">
+                                         <input type="hidden" value="<?php echo $u_id; ?>" name="u_id">
 											  <div class="row form-group">
                                                 <div class="col col-md-3">
                                                     <label for="text-input" class=" form-control-label">Name</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="name" value="<?php echo $rowusere['name']; ?>" placeholder="Name" class="form-control">
+                                                    <input type="text" id="text-input" name="name" value="<?php echo $rowusere['username']; ?>" placeholder="Name" class="form-control" readonly>
                                                    
                                                 </div>
                                             </div>
-											  <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Phone Number</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="phone" value="<?php echo $rowusere['phone']; ?>" placeholder="Phone" class="form-control">
-                                                   
-                                                </div>
-                                            </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="email-input" class=" form-control-label">Email Input</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="email" id="email-input" name="email" value="<?php echo $rowusere['email']; ?>" placeholder="Enter Email" class="form-control">
-                                                   
-                                                </div>
-                                            </div>
+											 
+                                          
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
                                                     <label for="password-input" class=" form-control-label">Password</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="password" id="password-input" name="pass" value="<?php echo $rowusere['pass']; ?>" placeholder="Password" class="form-control">
+                                                    <input type="password" id="password-input" name="password" value="<?php echo $rowusere['password']; ?>" placeholder="Password" class="form-control">
                                                     
                                                 </div>
                                             </div>

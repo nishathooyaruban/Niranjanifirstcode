@@ -13,17 +13,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                           
                         </li>
-						  <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>User Management</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="users.php">Users</a>
-                                </li>
-                               
-                               
-                            </ul>
-                        </li>
+						
 						  <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-calendar-alt"></i>Bookings</a>
@@ -51,6 +41,46 @@
                         </li>
 						<li class="has-sub">
                             <a class="js-arrow" href="#">
+                                <i class="fa fa-list-alt"></i>Inquiries</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                               
+								<li>
+                                    <a href="inquiries.php">Inquiries</a></a>
+                                </li>
+                             
+                               
+                            </ul>
+                        </li><li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fa fa-user"></i>Customers</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                               
+								<li>
+                                    <a href="customers.php">Customers</a></a>
+                                </li>
+                             
+                               
+                            </ul>
+                        </li>
+						
+						<?php if($u_type=='admin'){ ?>
+						<li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fa fa-file-o"></i>Reports</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                               
+								<li>
+                                    <a href="reports.php">Reports</a></a>
+                                </li>
+                             
+                               
+                            </ul>
+                        </li>
+						  
+						
+						
+						<li class="has-sub">
+                            <a class="js-arrow" href="#">
                                 <i class="fa fa-cutlery"></i>Menu Items</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                
@@ -61,8 +91,30 @@
                                
                             </ul>
                         </li>
-                       
-                      
+							<li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fa fa-picture-o "></i>Gallery</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                               
+								<li>
+                                    <a href="images.php">images</a></a>
+                                </li>
+                             
+                               
+                            </ul>
+                        </li>
+                       <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-user"></i>User Management</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="users.php">Users</a>
+                                </li>
+                               
+                               
+                            </ul>
+                        </li>
+                      <?php } ?>
                       
                     
                        

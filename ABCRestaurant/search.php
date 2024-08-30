@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+   <head><?php 
+   ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
+session_start();
+$cus_id=$_SESSION['cus_id']; 
+?> 
       <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,32 +35,51 @@
       <link rel="stylesheet" href="css/owl.carousel.min.css">
       <link rel="stylesheet" href="css/owl.theme.default.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+	  <style>
+	  .email-bt {
+    color: #080707;
+    width: 81%;
+    height: 55px;
+    font-size: 20px;
+    padding: 20px 40px;
+    border-radius: 30px;
+    border: 1px solid;
+}
+.btn-primary {
+    height: 55px;
+    font-size: 20px;
+    padding: 11px 7px;
+    width: 18%;
+    border-radius: 30px;
+}
+	  
+	  </style>
    </head>
    <body>
       <!--header section start -->
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
+               <div class="logo"><a href="index.php"><img src="images/logo.png"></a></div>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item ">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                      </li>
-                     <li class="nav-item ">
-                        <a class="nav-link" href="about.html">About Us</a>
+                     <li class="nav-item active">
+                        <a class="nav-link" href="about.php">About Us</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="menu.php">Menu</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="gallery.html">Gallery</a>
+                        <a class="nav-link" href="gallery.php">Gallery</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="services.html">Services</a>
+                        <a class="nav-link" href="services.php">Services</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact Us</a>
@@ -62,11 +87,19 @@
                      <li class="nav-item">
                      <a href="Book.php" class="btn btn-primary py-2 px-4">Book A Table</a>
                   </li>
-                  <li class="nav-item">
-                        <a class="nav-link" href="signup.html">Sign in</a>
+                 <?php if($cus_id==''){?>
+                  <li class="nav-item ">
+                        <a class="nav-link" href="signup.php">Sign in</a>
                      </li>
+				  <?php }else{ ?>
+					 <li class="nav-item ">
+                        <a class="nav-link" href="my_account.php">My Acount</a>
+                     </li><li class="nav-item ">
+                        <a class="nav-link" href="logout.php">Log Out</a>
+                     </li>
+					  <?php } ?>
                      <li class="nav-item">
-                        <a class="nav-link" href="search.html"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="search.php"><i class="fa fa-search" aria-hidden="true"></i></a>
                      </li>
                   </ul>
                </div>
@@ -78,17 +111,20 @@
       <div class="about_section layout_padding">
          <div class="container">
             <div class="row">
-               <div class="col-md-6">
-                  <div class="about_taital_main">
-                     <div class="about_taital">Thank you for the booking</div>
-                     <p class="about_text">Our story began in 2006 with a passion for Italian cuisine. We've been serving Colombo-3 with delicious food and warm hospitality ever since.</p>
-                     <p class="about_text">Our goal is to create an unforgettable dining experience for every guest.Join us for a memorable dining experience...</p>
-                     
-                  </div>
+               <div class="col-md-12">
+                 <form action="search_result.php" method="POST">
+				   <div class="form-group">
+                           <input type="text" id="name"class="email-bt" placeholder="Search Item" name="name" required > <button class="btn btn-primary" type="submit" >Search</button>	
+                        </div>
+                      
+                        <div class="send_btn">
+                           <div type="text"id="form-submit" class="main_bt">
+						  
+						   
+						   </div>
+				 </form>
                </div>
-               <div class="col-md-6">
-                  <div class="about_img"><img src="images/aboutuspage.jpg"></div>
-               </div>
+         
             </div>
          </div>
       </div>
@@ -106,11 +142,11 @@
                      <h3 class="useful_text">Menu</h3>
                      <div class="footer_menu">
                         <ul>
-                           <li><a href="index.html">Home</a></li>
-                           <li><a href="about.html">About Us</a></li>
+                           <li><a href="index.php">Home</a></li>
+                           <li><a href="about.php">About Us</a></li>
                            <li><a href="menu.php">Menu</a></li>
-                           <li><a href="gallery.html">Gallery</a></li>
-                           <li><a href="services.html">Services</a></li>
+                           <li><a href="gallery.php">Gallery</a></li>
+                           <li><a href="services.php">Services</a></li>
                            <li><a href="contact.php">Contact Us</a></li>
                            <li><a href="Book.php">Book a table</a></li>
                         </ul>

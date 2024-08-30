@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   <?php 
+   ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
+session_start();
+$cus_id=$_SESSION['cus_id'];
+?>
       <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,26 +42,26 @@
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
+               <div class="logo"><a href="index.php"><img src="images/logo.png"></a></div>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav ml-auto">
                     <li class="nav-item ">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
+                        <a class="nav-link" href="about.php">About Us</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="menu.php">Menu</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="gallery.html">Gallery</a>
+                        <a class="nav-link" href="gallery.php">Gallery</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="services.html">Services</a>
+                        <a class="nav-link" href="services.php">Services</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact Us</a>
@@ -62,11 +69,19 @@
                      <li class="nav-item">
                      <a href="Book.php" class="btn btn-primary py-2 px-4">Book A Table</a>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="signup.html">Sign in</a>
-                  </li>
+                 <?php if($cus_id==''){?>
+                  <li class="nav-item ">
+                        <a class="nav-link" href="signup.php">Sign in</a>
+                     </li>
+				  <?php }else{ ?>
+					 <li class="nav-item ">
+                        <a class="nav-link" href="my_account.php">My Acount</a>
+                     </li><li class="nav-item ">
+                        <a class="nav-link" href="logout.php">Log Out</a>
+                     </li>
+					  <?php } ?>
                      <li class="nav-item">
-                        <a class="nav-link" href="search.html"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="search.php"><i class="fa fa-search" aria-hidden="true"></i></a>
                      </li>
                   </ul>
                </div>
@@ -74,16 +89,23 @@
          </div>
       </div>
 	  <?php
+	   include 'config/mysqlicon.php'; 
 	  $email =$_POST['email'];
 $name =$_POST['name'];
 $phone =$_POST['phone'];
 $message =$_POST['message'];
+
+
+ 
+$SQL="INSERT INTO contact (name,email,phone,message) VALUES('$name','$email','$phone','$message')";
+
+$run=mysqli_query($con,$SQL);
 	  $to      = 'info@abcrestuarant.com';
-    $subject = 'Order Completed From ABC Restuarant';
-    $message = 'Customer '.$name.'<br>'
+    $subject = 'Thank you fro the inquary From ABC Restuarant';
+    $message = 'Customer '.$name.'<br>
 	
-'Phone '.$phone.'<br>'	
-'Message '.$message;
+Phone '.$phone.'<br>	
+Message '.$message;
     $headers = 'From: info@abcrestuarant.com'       . "\r\n" .
                  'Reply-To: info@abcrestuarant.com' . "\r\n" .
                  'X-Mailer: PHP/' . phpversion();

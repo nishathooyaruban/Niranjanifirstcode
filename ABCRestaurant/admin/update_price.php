@@ -5,19 +5,15 @@ error_reporting(E_ALL);
 
 
  include 'config/config.php'; 
+$item_id =$_POST['item_id'];
 
-$password =$_POST['password'];
-
-$u_id =$_POST['u_id'];
-
-date_default_timezone_set('Asia/colombo');
+$price =$_POST['price'];
 
 
 
- $created_on=date('Y-m-d h:i:s');
 
 
-$update="UPDATE `login` SET password = '".$password."' WHERE id = '".$u_id."'";
+$update="UPDATE `food_items` SET price = '".$price."'  WHERE id = '".$item_id."'";
 
 $run=mysqli_query($con, $update);
 
@@ -32,7 +28,7 @@ echo '<script type="text/javascript">
 
 		alert("Successfully Updated");
 
-		window.parent.location = "dashboard.php"
+		window.parent.location = "items.php"
 
 		//-->
 

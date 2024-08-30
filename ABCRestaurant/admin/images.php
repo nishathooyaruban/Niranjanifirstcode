@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Menu Items</h3>
+                                <h3 class="title-5 m-b-35">Gallery Items</h3>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Add New
 </button>				
@@ -35,46 +35,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create New Item</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Insert Image</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-	    <form action="create_item.php" method="POST" enctype="multipart/form-data">
+	    <form action="insert_gallery.php" method="POST" enctype="multipart/form-data">
       <div class="modal-body">
-   <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Name</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="name" class="form-control" required>
-                                                   
-                                                </div>
-                                            </div>
-											  
-                                          
-                                          <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">price</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                               
-												   <input type="text" id="email-input" name="price" value="" class="form-control" required >
-                                                </div>
-                                            </div>
-                                             <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label for="text-input" class=" form-control-label">Offer</label>
-                                                </div>
-                                                <div class="col-12 col-md-9">
-                                               <select name="sp" class="form-control" required>
-												<option value="">Select</option>
-												<option value="1">Yes</option>
-												<option value="0">No</option>
-											   
-											   </select>
-                                                </div>
-                                            </div>
+ 
                                              <div class="row form-group">
                                                 <div class="col col-md-3">
                                                     <label for="file-input" class=" form-control-label">Image</label>
@@ -100,9 +68,9 @@
                               <div class="table-responsive">
 								<table class="table">
 								<thead>
-								<th>Name</th>
+								
 								<th>Image</th>
-								<th>Price</th>
+							
 								
 								
 								<th></th>
@@ -113,25 +81,17 @@
 								include 'config/config.php'; 	
 								
 								
-										$sqlid= "SELECT * FROM food_items";	
+										$sqlid= "SELECT * FROM gallery";	
 								
 								
 								$runid=mysqli_query($con,$sqlid) or die("SQL error");	
 								$norid=mysqli_num_rows($runid);	while($rowid=mysqli_fetch_array($runid))	{ 	
 								?>                                            
 								<tr class="tr-shadow" style="background:#fff;">                                                                                              
-								<td><?php echo $rowid['name']; ?></td>                                                
+							                                            
 								<td><img src="../images/<?php echo $rowid['img']; ?>" style="width:150px;height:150px;object-fit:cover;"></td>
-								<td class="desc">
-								<form action="update_price.php" method="POST">
-								<input type="hidden" value="<?php echo $rowid['id']; ?>" name="item_id">
 								
-							
-								<input type="text" style="width: 115px;text-align: right; float: left;"id="email-input" name="price" value="<?php echo $rowid['price']; ?>" class="form-control" required >
-									<button class="btn btn-primary" type="submit" >Save</button>	
-								</form>
-								</td>
-								<td><div class="table-data-feature"><form action="delete_item.php" method="POST">
+								<td><div class="table-data-feature"><form action="delete_image.php" method="POST">
 								<input type="hidden" value="<?php echo $rowid['id']; ?>" name="item_id">
 							
 								<button class="btn btn-danger" type="submit" >Delete</button>	

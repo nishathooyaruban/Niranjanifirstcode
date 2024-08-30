@@ -30,7 +30,7 @@ $run=mySQLi_query($con,$SQL);
 echo'<script type="text/javascript">
 <!--
 alert("Successfully Requested");
-window.location = "thankyou_booking.html"
+window.location = "thankyou_booking.php"
 //-->
 </script>';
 

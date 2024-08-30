@@ -45,7 +45,7 @@
 								<td><?php echo $rowid['name']; ?></td>                                                
 								<td><span class="block-email"><?php echo $rowid['email']; ?></span></td>
 								<td class="desc"><?php echo $rowid['phone']; ?></td>
-								<td><span class="status--process"><?php echo $rowid['date']; ?></span></td>
+								<td><span class="status--process"><?php echo substr($rowid['date'], 0, -7);?></span></td>
 								<td><?php echo $rowid['people']; ?></td>
 								<td><?php echo $rowid['branch']; ?></td>
 								<td><?php echo $rowid['message']; ?></td>

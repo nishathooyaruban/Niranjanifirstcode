@@ -55,9 +55,9 @@ error_reporting(E_ALL);
 								<?php										 
 								include 'config/config.php'; 	
 								
-								date_default_timezone_set('Asia/colombo'); $created_on=date('Y-m-d');	
+						$cus_id=$_POST['cus_id'];
 								
-										$sqlid= "SELECT * FROM order_main ORDER BY delivery_date DESC";	
+										$sqlid= "SELECT * FROM order_main WHERE cus_id='$cus_id' ORDER BY delivery_date DESC";	
 								
 								
 								$runid=mysqli_query($con,$sqlid) or die("SQL error");	

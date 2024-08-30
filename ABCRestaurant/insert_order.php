@@ -10,11 +10,12 @@ include 'config/mysqlicon.php';
  $delivery_date = $_POST['delivery_date'];
  $pay_method=$_POST["pay_method"];
  $message=$_POST["message"];
+ $cus_id=$_POST["cus_id"];
 
 				
                      $insert_order = '  
-                     INSERT INTO order_main(name, email, phone,daddress,delivery_date,pay_method,message,status)  
-                     VALUES("'.$name.'", "'.$email.'","'.$phone.'","'.$phone.'","'.$delivery_date.'","'.$pay_method.'","'.$message.'", "PENDING")'; 
+                     INSERT INTO order_main(cus_id,name, email, phone,daddress,delivery_date,pay_method,message,status)  
+                     VALUES("'.$cus_id.'","'.$name.'", "'.$email.'","'.$phone.'","'.$phone.'","'.$delivery_date.'","'.$pay_method.'","'.$message.'", "PENDING")'; 
 					 if(mysqli_query($con, $insert_order))  
                      {  
                           $order_id = mysqli_insert_id($con);  
@@ -41,7 +42,7 @@ include 'config/mysqlicon.php';
 
 		alert("Successfully Updated");
 
-		window.parent.location = "thankyou_order.html"
+		window.parent.location = "thankyou_order.php"
 
 		//-->
 

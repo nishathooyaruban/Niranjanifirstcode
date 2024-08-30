@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+   <head><?php 
+   ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
+session_start();
+$cus_id=$_SESSION['cus_id'];
+?>
       <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,26 +41,26 @@
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
+               <div class="logo"><a href="index.php"><img src="images/logo.png"></a></div>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav ml-auto">
                     <li class="nav-item ">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Us</a>
+                        <a class="nav-link" href="about.php">About Us</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="menu.php">Menu</a>
                      </li>
                      <li class="nav-item active">
-                        <a class="nav-link" href="gallery.html">Gallery</a>
+                        <a class="nav-link" href="gallery.php">Gallery</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="services.html">Services</a>
+                        <a class="nav-link" href="services.php">Services</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact Us</a>
@@ -62,11 +68,19 @@
                      <li class="nav-item">
                      <a href="Book.php" class="btn btn-primary py-2 px-4">Book A Table</a>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="signup.html">Sign in</a>
-                  </li>
+                  <?php if($cus_id==''){?>
+                  <li class="nav-item ">
+                        <a class="nav-link" href="signup.php">Sign in</a>
+                     </li>
+				  <?php }else{ ?>
+					 <li class="nav-item ">
+                        <a class="nav-link" href="my_account.php">My Acount</a>
+                     </li><li class="nav-item ">
+                        <a class="nav-link" href="logout.php">Log Out</a>
+                     </li>
+					  <?php } ?>
                      <li class="nav-item">
-                        <a class="nav-link" href="search.html"><i class="fa fa-search" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="search.php"><i class="fa fa-search" aria-hidden="true"></i></a>
                      </li>
                   </ul>
                </div>
@@ -84,94 +98,33 @@
                </div>
             </div>
             <div class="">
+            
                <div class="gallery_section_2">
-                  <div class="row">
+			    <div class="row">
+			   <?php										 
+								include 'admin/config/config.php'; 	
+								
+								
+										$sqlid= "SELECT * FROM gallery";	
+								
+								
+								$runid=mysqli_query($con,$sqlid) or die("SQL error");	
+								$norid=mysqli_num_rows($runid);	while($rowid=mysqli_fetch_array($runid))	{ 	
+								?>   
+                 
                      <div class="col-md-4">
                         <div class="container_main">
-                           <img src="images/menunew1.jpg" alt="Avatar" class="image">
+                           <img src="images/<?php echo $rowid['img']; ?>" alt="Avatar" class="image">
+						   <br>
                            <div class="overlay">
                               <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
                            </div>
                         </div>
                      </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew2.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew3.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="gallery_section_2">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew4.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew5.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="overlay">
-                                 <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew6.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="overlay">
-                                 <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="gallery_section_2">
-                  <div class="row">
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew7.jpg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew8.jpeg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4">
-                        <div class="container_main">
-                           <img src="images/menunew9.jpeg" alt="Avatar" class="image">
-                           <div class="overlay">
-                              <div class="text"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                     
+         
+              <?php } ?>
+			        </div>
             </div>
            
          </div>
@@ -189,11 +142,11 @@
                  <h3 class="useful_text">Menu</h3>
                  <div class="footer_menu">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                           <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.php">Home</a></li>
+                           <li><a href="about.php">About Us</a></li>
                            <li><a href="menu.php">Menu</a></li>
-                           <li><a href="gallery.html">Gallery</a></li>
-                           <li><a href="services.html">Services</a></li>
+                           <li><a href="gallery.php">Gallery</a></li>
+                           <li><a href="services.php">Services</a></li>
                            <li><a href="contact.php">Contact Us</a></li>
                            <li><a href="Book.php">Book a table</a></li>
                     </ul>
